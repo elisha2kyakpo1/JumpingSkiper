@@ -1,4 +1,5 @@
 import 'phaser';
+import Button from '../objects/Button';
 
 export default class OptionsScene extends Phaser.Scene {
   constructor() {
@@ -33,28 +34,26 @@ export default class OptionsScene extends Phaser.Scene {
 
     this.updateAudio();
 
-    this.menuButton = this.add.sprite(400, 500, 'blueButton1').setInteractive();
-    this.menuText = this.add.text(0, 0, 'Menu', { fontSize: '32px', fill: '#fff' });
-    Phaser.Display.Align.In.Center(this.menuText, this.menuButton);
-
-    this.menuButton.on('pointerdown', (pointer) => {
-      this.scene.start('Title');
-    },bind(this));
+    this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
 
     this.updateAudio();
   }
 
-  updateAudio() {
-    if (this.musicOn === false) {
-      this.musicButton.setTexture('box');
-    } else {
-      this.musicButton.setTexture('checkedBox');
+  if (this.model.musicOn === false) {
+    this.musicButton.setTexture('box');
+    this.sys.game.globals.bgMusic.stop();
+    this.model.bgMusicPlaying = false;
+  } else {
+    this.musicButton.setTexture('checkedBox');
+    if (this.model.bgMusicPlaying === false) {
+      this.sys.game.globals.bgMusic.play();
+      this.model.bgMusicPlaying = true;
     }
-
-    if (this.soundOn === false) {
-      this.soundButton.setTexture('box');
-    } else {
-      this.soundButton.setTexture('checkedBox');
-    }
+  }
+   
+  if (this.model.soundOn === false) {
+    this.soundButton.setTexture('box');
+  } else {
+    this.soundButton.setTexture('checkedBox');
   }
 }
