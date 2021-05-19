@@ -70,5 +70,12 @@ export default class TitleScene extends Phaser.Scene {
     this.input.on('pointerout', (event, gameObjects) => {
       gameObjects[0].setTexture('blueButton1');
     });
+
+    this.model = this.sys.game.globals.model;
+    if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
+      this.model.bgMusicPlaying = true;
+      this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
+      this.bgMusic.play();
+    }
   }
 }

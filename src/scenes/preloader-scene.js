@@ -111,5 +111,5 @@ export default class PreloaderScene extends Phaser.Scene {
     if (this.readyCount === 2) {
       this.scene.start('Title');
     }
-  }
+  };
 }
