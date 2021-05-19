@@ -19,6 +19,7 @@
     "webpack-cli": "^4.7.0"
   },
   "scripts": {
+    "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
