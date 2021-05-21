@@ -18,7 +18,6 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.add.image(400, 300, 'sky');
     this.add.image(400, 300, 'star');
-
     const platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
@@ -67,6 +66,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     const bombs = this.physics.add.group();
+    this.physics.add.collider(bombs, platforms);
 
     //  The score
     this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
@@ -77,11 +77,11 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(bombs, platforms);
 
     this.physics.add.overlap(player, stars, collectStar, null, this);
-
     this.physics.add.collider(player, bombs, hitBomb, null, this);
   }
 
   update() {
+    const cursors = this.input.keyboard.createCursorKeys();
     if (gameOver) {
       return;
     }
@@ -106,11 +106,14 @@ export default class GameScene extends Phaser.Scene {
   }
 
   collectStar(player, star) {
+    let score = 0;
+    const scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
     this.star.disableBody(true, true);
 
     //  Add and update the score
     score += 10;
-    this.scoreText.setText(`Score: ${score}`);
+    scoreText.setText(`Score: ${score}`);
 
     if (stars.countActive(true) === 0) {
       //  A new batch of stars to collect
