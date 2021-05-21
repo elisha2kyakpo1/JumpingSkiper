@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 
+let scoreText;
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -69,7 +70,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(bombs, platforms);
 
     //  The score
-    this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
@@ -99,7 +100,6 @@ export default class GameScene extends Phaser.Scene {
 
       this.player.anims.play('turn');
     }
-
     if (cursors.up.isDown && player.body.touching.down) {
       this.player.setVelocityY(-330);
     }
@@ -107,7 +107,6 @@ export default class GameScene extends Phaser.Scene {
 
   collectStar(player, star) {
     let score = 0;
-    const scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
     this.star.disableBody(true, true);
 
