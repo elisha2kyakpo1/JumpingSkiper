@@ -23,32 +23,6 @@ class Game extends Phaser.Game {
   }
 }
 
-const Config = {
-  type: Phaser.AUTO,
-  parent: 'content',
-  width: 640,
-  height: 640,
-  zoom: 1,
-  dom: {
-    createContainer: true,
-  },
-  pixelArt: true,
-  physics: {
-    default: 'arcade',
-    arcade: {
-      gravity: { y: 0 },
-    },
-  },
-  scene: [
-    BootScene,
-    GameScene,
-    PreloaderScene,
-    TitleScene,
-    CreditsScene,
-    OptionsScene,
-  ],
-};
-
 // eslint-disable-next-line no-new
 // new Phaser.Game(gameConfig);
-window.game = new Game(Config);
+window.game = new Game();

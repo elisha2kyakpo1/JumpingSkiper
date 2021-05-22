@@ -71,19 +71,19 @@ export default class GameScene extends Phaser.Scene {
 
     //  The score
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-
+    // this.input.keyboard.createCursorKeys();
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs, platforms);
 
-    this.physics.add.overlap(player, stars, collectStar, null, this);
-    this.physics.add.collider(player, bombs, hitBomb, null, this);
+    this.physics.add.overlap(player, stars, this.collectStar, null, this);
+    this.physics.add.collider(player, bombs, this.hitBomb, null, this);
   }
 
   update() {
     const cursors = this.input.keyboard.createCursorKeys();
-    if (gameOver) {
+    if (this.gameOver) {
       return;
     }
 
@@ -100,7 +100,7 @@ export default class GameScene extends Phaser.Scene {
 
       this.player.anims.play('turn');
     }
-    if (cursors.up.isDown && player.body.touching.down) {
+    if (cursors.up.isDown && this.player.body.touching.down) {
       this.player.setVelocityY(-330);
     }
   }
@@ -114,7 +114,7 @@ export default class GameScene extends Phaser.Scene {
     score += 10;
     scoreText.setText(`Score: ${score}`);
 
-    if (stars.countActive(true) === 0) {
+    if (this.stars.countActive(true) === 0) {
       //  A new batch of stars to collect
       this.stars.children.iterate((child) => {
         child.enableBody(true, child.x, 0, true, true);
@@ -122,7 +122,7 @@ export default class GameScene extends Phaser.Scene {
 
       const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
-      const bomb = bombs.create(x, 16, 'bomb');
+      const bomb = this.bombs.create(x, 16, 'bomb');
       bomb.setBounce(1);
       bomb.setCollideWorldBounds(true);
       bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
@@ -137,6 +137,6 @@ export default class GameScene extends Phaser.Scene {
 
     this.player.anims.play('turn');
 
-    gameOver = true;
+    this.gameOver = true;
   }
 }
