@@ -11,11 +11,11 @@ import Model from './model';
 class Game extends Phaser.Game {
   constructor() {
     super(config);
+    this.scene.add('Options', OptionsScene);
     this.scene.add('Game', GameScene);
     this.scene.add('Boot', BootScene);
     this.scene.add('Preloader', PreloaderScene);
     this.scene.add('Title', TitleScene);
-    this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
     this.scene.start('Game');
     const model = new Model();
@@ -23,6 +23,4 @@ class Game extends Phaser.Game {
   }
 }
 
-// eslint-disable-next-line no-new
-// new Phaser.Game(gameConfig);
 window.game = new Game();

@@ -1,5 +1,9 @@
 import Phaser from 'phaser';
 
+let stars;
+let cursors;
+let player;
+let scoreText;
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -26,7 +30,7 @@ export default class GameScene extends Phaser.Scene {
     platforms.create(50, 250, 'ground');
     platforms.create(750, 220, 'ground');
 
-    const player = this.physics.add.sprite(100, 450, 'dude');
+    player = this.physics.add.sprite(100, 450, 'dude');
 
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
@@ -50,22 +54,39 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-    this.input.keyboard.createCursorKeys();
+    cursors = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(player, platforms);
 
     //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
-    const stars = this.physics.add.group({
+    stars = this.physics.add.group({
       key: 'star',
       repeat: 11,
       setXY: { x: 12, y: 0, stepX: 70 },
     });
 
     stars.children.iterate((child) => {
-    //  Give each star a slightly different bounce
+      //  Give each star a slightly different bounce
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     });
 
-    const cursors = this.input.keyboard.createCursorKeys();
+    cursors = this.input.keyboard.createCursorKeys();
+
+    const bombs = this.physics.add.group();
+    this.physics.add.collider(bombs, platforms);
+
+    //  The score
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    //  Add and update the score
+    //  Collide the player and the stars with the platforms
+    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(stars, platforms);
+    this.physics.add.collider(bombs, platforms);
+
+    this.physics.add.overlap(player, stars, this.collectStar, null, this);
+    this.physics.add.collider(player, bombs, this.hitBomb, null, this);
+  }
+
+  update() {
     if (this.gameOver) {
       return;
     }
@@ -83,33 +104,17 @@ export default class GameScene extends Phaser.Scene {
 
       player.anims.play('turn');
     }
-    if (cursors.up.isDown && this.player.body.touching.down) {
+    if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
     }
-
-    const bombs = this.physics.add.group();
-    this.physics.add.collider(bombs, platforms);
-
-    //  The score
-    let score = 0;
-    const scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-    //  Add and update the score
-    score += 10;
-    scoreText.setText(`Score: ${score}`);
-    // this.input.keyboard.createCursorKeys();
-    //  Collide the player and the stars with the platforms
-    this.physics.add.collider(player, platforms);
-    this.physics.add.collider(stars, platforms);
-    this.physics.add.collider(bombs, platforms);
-
-    this.physics.add.overlap(player, stars, this.collectStar, null, this);
-    this.physics.add.collider(player, bombs, this.hitBomb, null, this);
   }
 
   collectStar(player, star) {
-    this.star.disableBody(true, true);
-
-    if (this.stars.countActive(true) === 0) {
+    let score = 0;
+    star.disableBody(true, true);
+    score += 10;
+    scoreText.setText(`Score: ${score}`);
+    if (stars.countActive(true) === 0) {
       //  A new batch of stars to collect
       this.stars.children.iterate((child) => {
         child.enableBody(true, child.x, 0, true, true);

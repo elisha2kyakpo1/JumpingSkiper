@@ -4,7 +4,6 @@ const width = 640;
 const height = 640;
 const credits = `
 Created by @Elisha
-Game assets by @peter 
 `;
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
@@ -34,7 +33,7 @@ export default class CreditsScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 3000,
       delay: 1000,
-      onComplete() {
+      onComplete: () => {
         // eslint-disable-next-line no-unused-expressions
         this.destroy;
       },
