@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 
-let scoreText;
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -66,11 +65,37 @@ export default class GameScene extends Phaser.Scene {
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     });
 
+    const cursors = this.input.keyboard.createCursorKeys();
+    if (this.gameOver) {
+      return;
+    }
+
+    if (cursors.left.isDown) {
+      player.setVelocityX(-160);
+
+      player.anims.play('left', true);
+    } else if (cursors.right.isDown) {
+      player.setVelocityX(160);
+
+      player.anims.play('right', true);
+    } else {
+      player.setVelocityX(0);
+
+      player.anims.play('turn');
+    }
+    if (cursors.up.isDown && this.player.body.touching.down) {
+      player.setVelocityY(-330);
+    }
+
     const bombs = this.physics.add.group();
     this.physics.add.collider(bombs, platforms);
 
     //  The score
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    let score = 0;
+    const scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    //  Add and update the score
+    score += 10;
+    scoreText.setText(`Score: ${score}`);
     // this.input.keyboard.createCursorKeys();
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
@@ -81,38 +106,8 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(player, bombs, this.hitBomb, null, this);
   }
 
-  update() {
-    const cursors = this.input.keyboard.createCursorKeys();
-    if (this.gameOver) {
-      return;
-    }
-
-    if (cursors.left.isDown) {
-      this.player.setVelocityX(-160);
-
-      this.player.anims.play('left', true);
-    } else if (cursors.right.isDown) {
-      this.player.setVelocityX(160);
-
-      this.player.anims.play('right', true);
-    } else {
-      this.player.setVelocityX(0);
-
-      this.player.anims.play('turn');
-    }
-    if (cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
-    }
-  }
-
   collectStar(player, star) {
-    let score = 0;
-
     this.star.disableBody(true, true);
-
-    //  Add and update the score
-    score += 10;
-    scoreText.setText(`Score: ${score}`);
 
     if (this.stars.countActive(true) === 0) {
       //  A new batch of stars to collect
@@ -127,6 +122,7 @@ export default class GameScene extends Phaser.Scene {
       bomb.setCollideWorldBounds(true);
       bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
       bomb.allowGravity = false;
+      star.destroy();
     }
   }
 
@@ -138,5 +134,6 @@ export default class GameScene extends Phaser.Scene {
     this.player.anims.play('turn');
 
     this.gameOver = true;
+    bomb.distroy();
   }
 }
