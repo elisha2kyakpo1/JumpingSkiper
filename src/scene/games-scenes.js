@@ -24,7 +24,6 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.add.image(400, 300, 'sky');
-    this.add.image(400, 300, 'star');
     const platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
@@ -57,6 +56,7 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
+
     cursors = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(player, platforms);
 
@@ -68,11 +68,8 @@ export default class GameScene extends Phaser.Scene {
     });
 
     stars.children.iterate((child) => {
-      //  Give each star a slightly different bounce
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     });
-
-    cursors = this.input.keyboard.createCursorKeys();
 
     bombs = this.physics.add.group();
     this.physics.add.collider(bombs, platforms);
@@ -80,8 +77,6 @@ export default class GameScene extends Phaser.Scene {
     //  The score
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
-    //  Add and update the score
-    //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs, platforms);
@@ -100,7 +95,7 @@ export default class GameScene extends Phaser.Scene {
 
       player.anims.play('left', true);
     } else if (cursors.right.isDown) {
-      player.setVelocityX(160);
+      player.setVelocityX(300);
 
       player.anims.play('right', true);
     } else {
@@ -130,7 +125,6 @@ export default class GameScene extends Phaser.Scene {
       bomb.setCollideWorldBounds(true);
       bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
       bomb.allowGravity = false;
-      star.destroy();
     }
   }
 
@@ -139,7 +133,7 @@ export default class GameScene extends Phaser.Scene {
 
     player.setTint(0xff0000);
 
-    this.player.anims.play('turn');
+    player.anims.play('turn');
 
     this.gameOver = true;
     bomb.distroy();
