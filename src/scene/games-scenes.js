@@ -4,6 +4,9 @@ let stars;
 let cursors;
 let player;
 let scoreText;
+let score = 0;
+let bombs;
+
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -71,11 +74,12 @@ export default class GameScene extends Phaser.Scene {
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    const bombs = this.physics.add.group();
+    bombs = this.physics.add.group();
     this.physics.add.collider(bombs, platforms);
 
     //  The score
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
     //  Add and update the score
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
@@ -110,13 +114,12 @@ export default class GameScene extends Phaser.Scene {
   }
 
   collectStar(player, star) {
-    let score = 0;
     star.disableBody(true, true);
     score += 10;
     scoreText.setText(`Score: ${score}`);
     if (stars.countActive(true) === 0) {
       //  A new batch of stars to collect
-      this.stars.children.iterate((child) => {
+      stars.children.iterate((child) => {
         child.enableBody(true, child.x, 0, true, true);
       });
 
