@@ -14,7 +14,6 @@ export default class GameScene extends Phaser.Scene {
 
   preload() {
     // load images
-    this.load.image('logo', './assets/logo.png');
     this.load.image('sky', './assets/sky.png');
     this.load.image('ground', './assets/platform.png');
     this.load.image('star', './assets/star.png');
@@ -75,7 +74,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(bombs, platforms);
 
     //  The score
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#9f1239' });
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
@@ -117,6 +116,7 @@ export default class GameScene extends Phaser.Scene {
       //  A new batch of stars to collect
       stars.children.iterate((child) => {
         child.enableBody(true, child.x, 0, true, true);
+        scoreText.setText(`Score: ${score + 10}`);
       });
 
       const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
