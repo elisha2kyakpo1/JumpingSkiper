@@ -108,6 +108,7 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   collectStar(player, star) {
     star.disableBody(true, true);
     score += 10;
@@ -120,7 +121,7 @@ export default class GameScene extends Phaser.Scene {
 
       const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
-      const bomb = this.bombs.create(x, 16, 'bomb');
+      const bomb = bombs.create(x, 16, 'bomb');
       bomb.setBounce(1);
       bomb.setCollideWorldBounds(true);
       bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
@@ -136,6 +137,5 @@ export default class GameScene extends Phaser.Scene {
     player.anims.play('turn');
 
     this.gameOver = true;
-    bomb.distroy();
   }
 }
