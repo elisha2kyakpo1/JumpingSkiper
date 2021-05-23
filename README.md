@@ -6,7 +6,7 @@ In this project, I have built a browser game called phaser, using the phaser gam
 
 ## Getting Started
 
-Follow this [link](dist/img/phaser.png) to play this game in your browser
+Follow this [link](https://wonderful-yalow-9a6269.netlify.app/) to play this game in your browser
 
 ## Setup
 
