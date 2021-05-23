@@ -129,7 +129,7 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  hitBomb(player, bomb) {
+  hitBomb(player) {
     this.physics.pause();
 
     player.setTint(0xff0000);
