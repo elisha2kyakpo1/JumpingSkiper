@@ -1,5 +1,5 @@
 # phaser3-game
-In this project, I have build a browser game called phaser, using the phaser game engine. Phaser is an HTML5 game framework which aims to help developers make powerful, cross-browser HTML5 games really quickly. It's a Microverse capstone project, and this time I was required to create a game to put into practice the ES6, webpack, promises, Json data and functional programming. Users can play this game in the browser by using keyboard arrow keys.
+In this project, I have built a browser game called phaser, using the phaser game engine. Phaser is an HTML5 game framework which aims to help developers make powerful, cross-browser HTML5 games really quickly. It's a Microverse capstone project, and this time I was required to create a game to put into practice the ES6, webpack, promises, Json data and functional programming. Users can play this game in the browser by using __keyboard arrow keys__.
 
 ![Phaser world!](dist/img/phaser.png)
 
@@ -13,17 +13,17 @@ Follow this [link](dist/img/phaser.png) to play a game in your browser
 To get started, you should first get this file in your local machine by cloning or forking this project or typing in your terminal
 
 ```
- git clone https://github.com/elisha2kyakpo1/phaser3-game.git
+  git clone https://github.com/elisha2kyakpo1/phaser3-game.git
 
- cd phaser3-game
+  cd phaser3-game
 
- npm install webpack webpack-cli --save-dev
+  npm install webpack webpack-cli --save-dev
 
- npn install
+  npm install
 
   Just run the command below for webpack to compile the code.
 
- npx webpack --watch
+  npx webpack --watch
 ```
 
 ## To run the game
