@@ -3,7 +3,8 @@ import Phaser from 'phaser';
 const width = 640;
 const height = 640;
 const credits = `
-Created by @Elisha
+Created by Elisha k,
+A Microverse student!
 `;
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
