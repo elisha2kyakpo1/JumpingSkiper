@@ -6,6 +6,7 @@ let player;
 let scoreText;
 let score = 0;
 let bombs;
+let gameOverText;
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -82,6 +83,9 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.overlap(player, stars, this.collectStar, null, this);
     this.physics.add.collider(player, bombs, this.hitBomb, null, this);
+    gameOverText = this.add.text(400, 300, 'Game Over!', { fontSize: '55px', fill: '#9f1239' });
+    gameOverText.setOrigin(0.5);
+    gameOverText.visible = false;
   }
 
   update() {
@@ -136,5 +140,6 @@ export default class GameScene extends Phaser.Scene {
 
     player.anims.play('turn');
     this.gameOver = true;
+    gameOverText.visible = true;
   }
 }
