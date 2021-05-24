@@ -22,7 +22,7 @@ export default class LeaderboardScene extends Phaser.Scene {
     this.add.text(100, 300, `3) ${this.topScores[2].user} - ${this.topScores[2].score}`, { fontSize: '32px' });
 
     if (this.score) {
-      const myPos = findRank(this.topScores, this.score);
+      const myPos = (this.topScores, this.score);
       this.add.text(100, 350, 'Your Score', { fontSize: '25px' });
       this.add.text(100, 400, `${myPos}) ${this.topScores[myPos - 1].user} - ${this.topScores[myPos - 1].score}`, { fontSize: '32px' });
     }
