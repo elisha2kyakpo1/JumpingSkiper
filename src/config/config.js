@@ -2,9 +2,12 @@ import Phaser from 'phaser';
 
 export default {
   type: Phaser.AUTO,
-  parent: 'phaser-Game',
-  width: 800,
-  height: 600,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    parent: 'phaser-Game',
+    width: 800,
+    height: 600,
+  },
   physics: {
     default: 'arcade',
     arcade: {
