@@ -135,7 +135,6 @@ export default class GameScene extends Phaser.Scene {
     player.setTint(0xff0000);
 
     player.anims.play('turn');
-
     this.gameOver = true;
   }
 }
