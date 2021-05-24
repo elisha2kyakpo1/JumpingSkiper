@@ -16,6 +16,9 @@ export default class OptionsScene extends Phaser.Scene {
     this.soundButton = this.add.image(200, 300, 'checkedBox');
     this.soundText = this.add.text(250, 290, 'Sound Enabled', { fontSize: 24 });
 
+    this.text = this.add.text(250, 340, 'Game Instructions', { fontSize: 40 });
+    this.soundText = this.add.text(200, 400, 'Use Arrow keys on your key board to play the game!', { fontSize: 16 });
+
     this.musicButton.setInteractive();
     this.soundButton.setInteractive();
 
