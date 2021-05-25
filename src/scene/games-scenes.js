@@ -144,6 +144,6 @@ export default class GameScene extends Phaser.Scene {
     player.anims.play('turn');
     this.gameOver = true;
     gameOverText.visible = true;
-    this.gameButton = new Button(this, width / 2, height / 2 - 100, 'blueButton1', 'blueButton2', 'Play again', 'Boot');
+    this.gameButton = new Button(this, width / 2, height / 1.09 - 100, 'blueButton1', 'blueButton2', 'Restart!', 'Boot');
   }
 }
