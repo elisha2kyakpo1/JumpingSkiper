@@ -140,7 +140,12 @@ export default class GameScene extends Phaser.Scene {
 
     player.anims.play('turn');
     this.gameOver = true;
-    this.scene.start('Boot');
     gameOverText.visible = true;
+
+    if (this.gameOver === true) {
+      this.registry.destroy();
+      this.events.off();
+      // this.game.scene.start('Boot');
+    }
   }
 }
