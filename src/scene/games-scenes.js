@@ -75,7 +75,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(bombs, platforms);
 
     //  The score
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#9f1239' });
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
@@ -140,6 +140,7 @@ export default class GameScene extends Phaser.Scene {
 
     player.anims.play('turn');
     this.gameOver = true;
+    this.scene.start('Boot');
     gameOverText.visible = true;
   }
 }
