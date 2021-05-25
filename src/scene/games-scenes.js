@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import Button from '../objects/button';
 
 let stars;
 let cursors;
@@ -7,6 +8,8 @@ let scoreText;
 let score = 0;
 let bombs;
 let gameOverText;
+const width = 640;
+const height = 640;
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -27,7 +30,7 @@ export default class GameScene extends Phaser.Scene {
     const platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-
+    // this.gameButton = false;
     platforms.create(600, 400, 'ground');
     platforms.create(50, 250, 'ground');
     platforms.create(750, 220, 'ground');
@@ -141,11 +144,6 @@ export default class GameScene extends Phaser.Scene {
     player.anims.play('turn');
     this.gameOver = true;
     gameOverText.visible = true;
-
-    if (this.gameOver === true) {
-      this.registry.destroy();
-      this.events.off();
-      // this.game.scene.start('Boot');
-    }
+    this.gameButton = new Button(this, width / 2, height / 2 - 100, 'blueButton1', 'blueButton2', 'Play again', 'Boot');
   }
 }

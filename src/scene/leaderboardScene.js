@@ -17,9 +17,9 @@ export default class LeaderboardScene extends Phaser.Scene {
     this.scores = await getUserScores();
     this.topScores = topScores(this.scores.result);
 
-    this.add.text(100, 200, `1) ${this.topScores[0].user} - ${this.topScores[0].score}`, { fontSize: '32px' });
-    this.add.text(100, 250, `2) ${this.topScores[1].user} - ${this.topScores[1].score}`, { fontSize: '32px' });
-    this.add.text(100, 300, `3) ${this.topScores[2].user} - ${this.topScores[2].score}`, { fontSize: '32px' });
+    this.add.text(100, 250, `1) ${this.topScores[1].user} - ${this.topScores[1].score}`, { fontSize: '32px' });
+    this.add.text(100, 300, `2) ${this.topScores[2].user} - ${this.topScores[2].score}`, { fontSize: '32px' });
+    this.add.text(100, 350, `3) ${this.topScores[3].user} - ${this.topScores[3].score}`, { fontSize: '32px' });
 
     if (this.score) {
       const myPos = (this.topScores, this.score);
