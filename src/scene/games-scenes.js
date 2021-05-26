@@ -30,7 +30,6 @@ export default class GameScene extends Phaser.Scene {
     const platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    // this.gameButton = false;
     platforms.create(600, 400, 'ground');
     platforms.create(50, 250, 'ground');
     platforms.create(750, 220, 'ground');

@@ -1,5 +1,8 @@
 # phaser3-RPG game
-In this project, I have built a browser game using the phaser game engine. Phaser is an HTML5 game framework that aims to help developers make powerful, cross-browser HTML5 games really quickly. It's a Microverse capstone project, and this time I was required to create a game to put into practice the ES6, Webpack, promises, JSON data, and functional programming. Users can play this game in the browser by using keyboard arrow keys.
+In this project, I have built a browser game using the phaser game engine. Phaser is an HTML5 game framework that aims to help developers make powerful, cross-browser HTML5 games really quickly. It's a Microverse capstone project, and this time I was required to create a game to put into practice the ES6, Webpack, promises, JSON data, and functional programming. Users can play this game in the browser by using __keyboard arrow keys__.
+
+## Game design
+The game has two major files, a config file, and a game-scene file, the config file controls the browser window where the game is displayed, this is done either by webGL or HTML canvas element. The game-scene file controls game, from the initialization of keyboard controls to the introduction of bombs. The collectStars function checks if the number of stars is equal to zero using the countActive phaser function, if yes, the iterate function is called to release a set of stars. The game ends when a player and a bomb meet, this is made possible by hitBomb function, it pauses the physics and turns a player to face the camera, thereafter, a player is given a red color and set gameOverText.visible to true. 
 
 ![Phaser world!](dist/img/phaser.png)
 
