@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
-import postScores from '../API/post-scores';
 import Button from '../objects/button';
 import config from '../config/config';
+import postScores from '../API/leader-board';
 
 export default class GameOver extends Phaser.Scene {
   constructor() {
