@@ -1,31 +1,47 @@
 const MyGameId = 'Zl4d7IVkemOTTVg2fUdz';
 const baseURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
 
-const getUserScores = async (gameId = MyGameId) => {
-  const gameScoresURL = `${baseURL}games/${gameId}/scores`;
+async function getScores() {
+  try {
+    const response = await fetch(
+      `${baseURL}/games/${MyGameId}/scores/`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    const obj = await response.json();
+    const arr = await obj.result;
+    return arr;
+  } catch (e) {
+    return e;
+  }
+}
 
-  const data = await fetch(gameScoresURL);
-  const userScores = await data.json();
+async function sortScores(arr) {
+  const data = await arr.sort((a, b) => b.score - a.score);
+  return data;
+}
 
-  return userScores;
-};
-const postUserScore = async (userName, userScore, gameId = MyGameId) => {
-  const gameScoresURL = `${baseURL}games/${gameId}/scores`;
+async function renderScores() {
+  const scores = await getScores();
+  const sortedScores = await sortScores(scores);
 
-  const res = await fetch(gameScoresURL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      user: userName,
-      score: userScore,
-    }),
+  const table = document.getElementById('table');
+  for (let i = 0; i < 10; i += 1) {
+    const { user } = sortedScores[i];
+    const { score } = sortedScores[i];
+    const tr = document.createElement('tr');
+    const userCell = document.createElement('td');
+    const scoreCell = document.createElement('td');
+    userCell.textContent = user;
+    scoreCell.textContent = score;
+    tr.appendChild(userCell);
+    tr.appendChild(scoreCell);
+    table.appendChild(tr);
+  }
+}
 
-  });
-
-  await res.json();
-  return res;
-};
-
-export { getUserScores, postUserScore };
+export { renderScores, getScores };
