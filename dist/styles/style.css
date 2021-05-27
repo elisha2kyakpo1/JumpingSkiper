@@ -3,6 +3,7 @@ body {
   width: 100vw;
   height: 100vh;
   display: flex;
+  justify-content: center;
 }
 
 .login {
@@ -95,7 +96,7 @@ h1 {
   text-shadow: 1px 1px 0px #37a69b;
   padding-top: 6px;
   border: none;
-  background-color: #9ca3af;
+  background-color: #000;
   border-radius: 5px;
   margin-bottom: 10px;
 }

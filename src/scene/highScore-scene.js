@@ -17,7 +17,7 @@ export default class HighScores extends Phaser.Scene {
         </tr>
       </table>
     </div>`;
-    const element = this.add.dom(667, 200).createFromHTML(table);
+    const element = this.add.dom(667, 100).createFromHTML(table);
 
     this.tweens.add({
       targets: element,
