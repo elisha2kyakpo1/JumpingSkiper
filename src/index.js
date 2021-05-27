@@ -8,14 +8,12 @@ import OptionsScene from './scene/options-scene';
 import CreditsScene from './scene/credits-scene';
 import LeaderboardScene from './scene/leaderboardScene';
 import Model from './model';
-import HighScores from './scene/highScore-scene';
 import GameOver from './scene/game-over';
 
 class Game extends Phaser.Game {
   constructor() {
     super(config);
     this.scene.add('Options', OptionsScene);
-    this.scene.add('HighScore', HighScores);
     this.scene.add('Game', GameScene);
     this.scene.add('Boot', BootScene);
     this.scene.add('Preloader', PreloaderScene);
