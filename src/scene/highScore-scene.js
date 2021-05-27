@@ -9,14 +9,14 @@ export default class HighScores extends Phaser.Scene {
 
   create() {
     const table = `<div class="table">
-  <h1>Top 10 Scores</h1>
-  <table id="table">
-    <tr>
-      <th class="table-row">Player</th>
-      <th class="table-row">Score</th>
-    </tr>
-  </table>
-</div>`;
+      <h1>Top 10 Scores</h1>
+      <table id="table">
+        <tr>
+          <th class="table-row">Player</th>
+          <th class="table-row">Score</th>
+        </tr>
+      </table>
+    </div>`;
     const element = this.add.dom(667, 200).createFromHTML(table);
 
     this.tweens.add({
