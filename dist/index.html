@@ -9,7 +9,22 @@
   <link rel="stylesheet" href="../dist/styles/style.css">
 </head>
   <body>
-    <div id="username"></div>
+    <div class="login">
+      <input type="text" placeholder="Username" id="username" name="username">
+    
+      <input type="submit" value="Sign In" name="loginButton">
+    </div>
+    <div class="shadow"></div>
+
+    <div class="table">
+      <h1>Top 10 Scores</h1>
+      <table id="table">
+        <tr>
+          <th class="table-row">Player</th>
+          <th class="table-row">Score</th>
+        </tr>
+      </table>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
