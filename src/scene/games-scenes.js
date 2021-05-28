@@ -10,8 +10,6 @@ let bombs;
 let gameOverText;
 const width = 640;
 const height = 640;
-let currentScrore;
-let highScore;
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -30,6 +28,7 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.add.image(400, 300, 'sky');
     const platforms = this.physics.add.staticGroup();
+    // this.cameras.main.startFollow(player, true);
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
     platforms.create(600, 400, 'ground');
@@ -90,12 +89,6 @@ export default class GameScene extends Phaser.Scene {
     gameOverText = this.add.text(400, 300, 'Game Over!', { fontSize: '55px', fill: '#9f1239' });
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
-
-    currentScrore = this.add.text(20, 400, `your score: ${score}`, { fontSize: '32px', fill: '#000' });
-    currentScrore.setOrigin(2);
-    currentScrore.visible = false;
-
-    this.add.text(this, width / 2, height / 2, `Your score: ${score} \nBest score: ${highScore} \n\nTap to restart`, { font: '32px Monospace', fill: '#00ff00', align: 'center' });
   }
 
   update() {
@@ -151,12 +144,6 @@ export default class GameScene extends Phaser.Scene {
     player.anims.play('turn');
     this.gameOver = true;
     gameOverText.visible = true;
-    currentScrore.visible = true;
-
-    const localStorageName = 'Elisha';
-    highScore = localStorage.getItem(localStorageName) == null ? 0
-      : localStorage.getItem(localStorageName);
-
     this.gameButton = new Button(this, width / 2, height / 1.09 - 100, 'blueButton1', 'blueButton2', 'Restart!', 'Boot');
   }
 }

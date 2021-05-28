@@ -72,11 +72,6 @@ export default class PreloaderScene extends Phaser.Scene {
       assetText.destroy();
     });
 
-    // load assets needed in our game
-    this.load.image('blueButton1', 'assets/ui/blue_button02.png');
-    this.load.image('blueButton2', 'assets/ui/blue_button03.png');
-    this.load.image('phaserLogo', 'assets/logo.png');
-
     // remove progress bar when complete
     this.load.on('complete', () => {
       progressBar.destroy();
@@ -92,12 +87,11 @@ export default class PreloaderScene extends Phaser.Scene {
     // load assets needed in our game
     this.load.image('blueButton1', 'assets/ui/blue_button02.png');
     this.load.image('blueButton2', 'assets/ui/blue_button03.png');
-    this.load.image('phaserLogo', './assets/logo.png');
 
     this.load.image('phaserLogo', './assets/logo.png');
     this.load.image('box', 'assets/ui/grey_box.png');
     this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
-    this.load.audio('bgMusic', ['assets/techno_stargazev2.1loop.ogg']);
+    this.load.audio('bgMusic', 'assets/ui/src_assets_sounds_monster2.mp3');
   }
 
   init() {
@@ -107,7 +101,7 @@ export default class PreloaderScene extends Phaser.Scene {
   ready() {
     this.readyCount += 1;
     if (this.readyCount === 2) {
-      this.scene.start('Title');
+      this.scene.start('Options');
     }
   }
 }
