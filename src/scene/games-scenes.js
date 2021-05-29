@@ -28,7 +28,6 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.add.image(400, 300, 'sky');
     const platforms = this.physics.add.staticGroup();
-    // this.cameras.main.startFollow(player, true);
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
     platforms.create(600, 400, 'ground');
@@ -89,6 +88,10 @@ export default class GameScene extends Phaser.Scene {
     gameOverText = this.add.text(400, 300, 'Game Over!', { fontSize: '55px', fill: '#9f1239' });
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
+
+    // this.cameras.main.setBounds(0, 0, LEVEL_WIDTH, LEVEL_HEIGHT);
+    this.cameras.main.startFollow(player, true);
+    // this.cameras.main.setZoom(0.75);
   }
 
   update() {
