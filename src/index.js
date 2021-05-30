@@ -35,8 +35,7 @@ button.onclick = () => {
   if (localStorage) {
     if (inputUsername.value !== '') {
       localStorage.clear();
-      const local = localStorage.setItem('user', user);
-      console.log(local);
+      localStorage.setItem('user', user);
       div.removeChild(inputUsername);
       div.removeChild(button);
       div.classList += 'dnone';
