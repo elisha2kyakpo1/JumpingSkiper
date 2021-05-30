@@ -32,12 +32,15 @@ button.onclick = () => {
   const inputUsername = document.getElementById('username');
   const user = JSON.stringify(inputUsername.value);
   const div = document.getElementById('login');
-  if (inputUsername.value !== '') {
-    localStorage.clear();
-    localStorage.setItem('user', user);
-    div.removeChild(inputUsername);
-    div.removeChild(button);
-    div.classList += 'dnone';
-    window.game = new Game();
+  if (localStorage) {
+    if (inputUsername.value !== '') {
+      localStorage.clear();
+      const local = localStorage.setItem('user', user);
+      console.log(local);
+      div.removeChild(inputUsername);
+      div.removeChild(button);
+      div.classList += 'dnone';
+      window.game = new Game();
+    }
   }
 };
