@@ -22,17 +22,21 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('ground', './assets/platform.png');
     this.load.image('star', './assets/star.png');
     this.load.image('bomb', './assets/bomb.png');
+    this.load.image('trees', './assets/trees-h.png');
     this.load.spritesheet('dude', './assets/dude.png', { frameWidth: 32, frameHeight: 48 });
   }
 
   create() {
     this.add.image(400, 300, 'sky');
+    this.add.image(800, 568, 'trees').setScale(4);
+
     const platforms = this.physics.add.staticGroup();
 
-    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(400, 568, 'ground').setScale(6).refreshBody();
     platforms.create(600, 400, 'ground');
-    platforms.create(50, 250, 'ground');
-    platforms.create(750, 220, 'ground');
+    platforms.create(350, 250, 'ground');
+    platforms.create(750, 250, 'ground');
+    platforms.create(150, 250, 'ground');
 
     player = this.physics.add.sprite(100, 450, 'dude');
 
@@ -59,6 +63,8 @@ export default class GameScene extends Phaser.Scene {
       repeat: -1,
     });
 
+    this.trees = this.add.tileSprite(0, 0, 'trees').setOrigin(0).setScrollFactor(0, 1);
+    this.trees.fixedToCamera = true;
     cursors = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(player, platforms);
 
@@ -88,13 +94,16 @@ export default class GameScene extends Phaser.Scene {
     gameOverText = this.add.text(400, 300, 'Game Over!', { fontSize: '55px', fill: '#9f1239' });
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
-
-    this.cameras.main.startFollow(player, true);
   }
 
   update() {
     if (this.gameOver) {
       return;
+    }
+
+    if (cursors.left.isDown || cursors.right.isDown) {
+      this.trees.setTilePosition(this.cameras.main.scrollX);
+      this.trees.tilePositionX += 100;
     }
 
     if (cursors.left.isDown) {
