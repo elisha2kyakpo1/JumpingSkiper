@@ -28,8 +28,7 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.add.image(400, 300, 'sky');
-    this.trees = this.add.tileSprite(400, 400, width, 400, 'trees').setOrigin(0).setScrollFactor(0, 1);
-    // this.trees = this.add.physics
+    this.trees = this.add.tileSprite(0, 400, 800, 100, 'trees').setOrigin(0).setScrollFactor(0, 1);
     const platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(6).refreshBody();
@@ -64,6 +63,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     cursors = this.input.keyboard.createCursorKeys();
+    this.physics.add.collider(player, platforms);
 
     //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
     stars = this.physics.add.group({
@@ -77,13 +77,12 @@ export default class GameScene extends Phaser.Scene {
     });
 
     bombs = this.physics.add.group();
-    this.physics.add.collider(bombs, platforms);
 
     //  The score
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
+    this.physics.add.collider(bombs, platforms);
 
     this.physics.add.overlap(player, stars, this.collectStar, null, this);
     this.physics.add.collider(player, bombs, this.hitBomb, null, this);
@@ -93,18 +92,18 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    // this.trees.setTilePosition(this.cameras.main.scrollX);
-    this.trees.tileposition.x = -150;
     if (this.gameOver) {
       return;
     }
 
     if (cursors.left.isDown) {
       player.setVelocityX(-160);
+      this.trees.tilePositionX += 2;
 
       player.anims.play('left', true);
     } else if (cursors.right.isDown) {
       player.setVelocityX(300);
+      this.trees.tilePositionX -= 2;
 
       player.anims.play('right', true);
     } else {
