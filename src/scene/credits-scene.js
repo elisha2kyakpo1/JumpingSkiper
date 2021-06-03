@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-const width = 640;
+const width = 800;
 const height = 640;
 const credits = `
 Created by Elisha k,

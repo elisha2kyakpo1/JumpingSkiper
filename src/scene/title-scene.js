@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import Button from '../objects/button';
 
-const width = 640;
+const width = 800;
 const height = 640;
 export default class TitleScene extends Phaser.Scene {
   constructor() {
