@@ -98,12 +98,12 @@ export default class GameScene extends Phaser.Scene {
 
     if (cursors.left.isDown) {
       player.setVelocityX(-160);
-      this.trees.tilePositionX += 2;
+      this.trees.tilePositionX -= 2;
 
       player.anims.play('left', true);
     } else if (cursors.right.isDown) {
       player.setVelocityX(300);
-      this.trees.tilePositionX -= 2;
+      this.trees.tilePositionX += 2;
 
       player.anims.play('right', true);
     } else {
