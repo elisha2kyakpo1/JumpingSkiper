@@ -25,21 +25,4 @@ class Game extends Phaser.Game {
     this.globals = { model, bgMusic: null };
   }
 }
-
-const button = document.getElementById('button');
-
-button.onclick = () => {
-  const inputUsername = document.getElementById('username');
-  const user = JSON.stringify(inputUsername.value);
-  const div = document.getElementById('login');
-  if (localStorage) {
-    if (inputUsername.value !== '') {
-      localStorage.clear();
-      localStorage.setItem('user', user);
-      div.removeChild(inputUsername);
-      div.removeChild(button);
-      div.classList += 'dnone';
-      window.game = new Game();
-    }
-  }
-};
+window.game = new Game();

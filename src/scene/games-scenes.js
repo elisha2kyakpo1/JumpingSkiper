@@ -10,6 +10,8 @@ let bombs;
 let gameOverText;
 const width = 640;
 const height = 640;
+let userName;
+let finalScore;
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -89,6 +91,9 @@ export default class GameScene extends Phaser.Scene {
     gameOverText = this.add.text(400, 300, 'Game Over!', { fontSize: '55px', fill: '#9f1239' });
     gameOverText.setOrigin(0.5);
     gameOverText.visible = false;
+    userName = prompt('Please enter your name', 'name');
+    finalScore = this.add.text(260, 50, 'finalScore', { fontSize: '20px', fill: '#9f1239' });
+    finalScore.visible = false;
   }
 
   update() {
@@ -121,6 +126,7 @@ export default class GameScene extends Phaser.Scene {
     star.disableBody(true, true);
     score += 10;
     scoreText.setText(`Score: ${score}`);
+    finalScore.setText(`${userName}, your core is: ${score}`);
     if (stars.countActive(true) === 0) {
       //  A new batch of stars to collect
       stars.children.iterate((child) => {
